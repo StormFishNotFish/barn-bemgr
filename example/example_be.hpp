@@ -2,31 +2,26 @@
 File From BarnUI/label.hpp
 */
 /**
- * @file label.hpp
- * @author StormfishChi
- * @brief Label控件头文件
- * @date 2026-8-31
- * @version v0.1
+ * @file name.hpp
+ * @author somebody
+ * @brief ...
+ * @date ...
+ * @version ...
  */
-#ifndef __barnui_label__impl
-#define __barnui_label__impl
-#include "baserender.hpp"
-#include <string>
-#include <SDL3_ttf/SDL_ttf.h>
+#ifndef __barnext_extname__impl
+#define __barnext_extname__impl
+//#include<...>
 /**
- * @brief Label控件的属性结构体
+ * @brief ...
  */
-struct LabelData : public WidgetData{
-	std::string text;/**< Label内容 @note EXTERNAL*/
-	TTF_Font *pFont;/**< 字体指针 @note EXTERNAL*/
-	SDL_Texture *pTexture;/**< 生成的字符串纹理指针 @note INTERNAL*/
+struct NameData : public SomeData{
+//...
 };
 /**
- * @brief Label控件的清理函数
+ * @brief Cleanup function of name widget
  * 
- * @param ctx 当前UIContext
- * @param wid 当前控件指针
- * @note 此函数不需要手动调用！
+ * @param ctx Current UI Context
+ * @param wid Current widget pointer
  */
 void LabelCF(UIContext *ctx, Widget *wid) {
 	LabelData *pData = (LabelData*)wid->pData;
@@ -34,11 +29,10 @@ void LabelCF(UIContext *ctx, Widget *wid) {
 	pData->pTexture = NULL;
 }
 /**
- * @brief Label控件的初始化函数
+ * @brief Initial function of name widget
  * 
- * @param ctx 当前UIContext
- * @param wid 当前控件指针
- * @note 此函数仅在更改字符串内容时手动调用！
+ * @param ctx Current UI Context
+ * @param wid Current widget pointer
  */
 void LabelIF(UIContext *ctx, Widget *wid) {
 	LabelData *pData = (LabelData*)wid->pData;
@@ -50,24 +44,33 @@ void LabelIF(UIContext *ctx, Widget *wid) {
 	SDL_DestroySurface(pSurface);
 }
 /**
- * @brief Label文字的绘制函数
- *  
- * @param ctx 当前UIContext
- * @param wid 当前控件指针
- */
-void TextRF(UIContext *ctx, Widget *wid) {
-	LabelData *pData = (LabelData*)wid->pData;
-	SDL_RenderTexture(ctx->pRenderer, pData->pTexture, 0, &pData->xyhws[BARNUI_LABEL_XYHW_LAYER]);
-}
-/**
- * @brief Label控件的绘制函数
+ * @brief Render function of name widget
  * 
- * @param ctx 当前UIContext
- * @param wid 当前控件指针
- * @note 此函数不需要手动调用！
+ * @param ctx Current UI Context
+ * @param wid Current widget pointer
  */
 void LabelRF(UIContext *ctx, Widget *wid) {
 	BackgroundRF(ctx, wid);
 	TextRF(ctx, wid);
+}
+/**
+ * @brief Handle Event function of name widget
+ *
+ * @param ctx Current UI Context
+ * @param wid Current widget pointer
+ * @param ev Current event struct
+*/
+void LabelHEF(UIContext *ctx, Widget *wid, SDL_Event *ev) {
+
+}
+/**
+ * @brief Some method render/handle event/cleanup/init functions
+ * 
+ * @param ctx Current UI Context
+ * @param wid Current widget pointer
+ */
+void TextRF(UIContext *ctx, Widget *wid) {
+	LabelData *pData = (LabelData*)wid->pData;
+	SDL_RenderTexture(ctx->pRenderer, pData->pTexture, 0, &pData->xyhws[BARNUI_LABEL_XYHW_LAYER]);
 }
 #endif
